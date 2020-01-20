@@ -1,5 +1,5 @@
-name: dev
-
+  
+name: 部署测试环境
 on:
   push:
     branches: 
@@ -7,25 +7,16 @@ on:
   pull_request:
     branches: 
       - master
-
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    runs-on: linux
     steps:
-    - uses: actions/checkout@v2.0.0
+    - uses: actions/checkout@dev
     - name: Run a one-line script
       run:
-        yarn add
+        yarn install
         yarn build
-    - name: cos 配置
-      env: 
-        APPID: 1256581102
-        REGION: ap-shanghai
-        BUCKET: blog-1256581102
-        SECRET_ID: ${{ secrets.TENCENTCLOUD_SECRET_ID }} # 值存放在第二步所说的secrets中
-        SECRET_KEY: ${{ secrets.TENCENTCLOUD_SECRET_KEY }} # 同上
-      run: coscmd config -a $SECRET_ID -s $SECRET_KEY -b $BUCKET -r $REGION
-    - name: 上传到 cos
-      run: coscmd upload -rs ./ / --ignore "./.git/*"
+    - name: Run a multi-line script
+      run: |
+        echo Add other actions to build,
+        echo test, and deploy your project.
