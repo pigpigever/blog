@@ -18,7 +18,7 @@ jobs:
     - name: Deploy
       uses: zkqiang/tencent-cos-action@master
       with:
-        args: upload -r ./data/ /
+        args: delete -r -f / && upload -r /home/ubuntu/data /
         secret_id: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
         secret_key: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}
         bucket: ${{ secrets.TENCENTCLOUD_BUCKET }}
