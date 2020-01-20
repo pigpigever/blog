@@ -11,24 +11,12 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2.0.0
-    - name: Start Running
-      run: |
-        yarn install
-        yarn build
-    - uses: actions/setup-python@v1
-      with:
-        python-version: '3.x'
-        architecture: 'x64'
-    - name: Install coscmd
-      run: pip install -U coscmd
-
-    - name: Upload COS
+    - name: Deploy to Staging server
+      uses: easingthemes/ssh-deploy@v2.0.7
       env:
-        SECRET_ID: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
-        SECRET_KEY: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}
-        BUCKET: ${{secrets.TENCENTCLOUD_BUCKET}}
-        REGION: ap-shanghai
-        CI:  true
-      run: |  
-        coscmd config -a $SECRET_ID -s $SECRET_KEY -b $BUCKET -r $REGION
-        coscmd upload -rs ./ /home/ubuntu/data/ --ignore "./node_modules/*"
+        SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+        ARGS: "-rltgoDzvO"
+        SOURCE: "dist/"
+        REMOTE_HOST: 122.51.79.147
+        REMOTE_USER: ubuntu
+        TARGET: /home/ubuntu/data
