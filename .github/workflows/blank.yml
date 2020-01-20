@@ -30,4 +30,4 @@ jobs:
         REGION: ap-shanghai
       run: |  
         coscmd config -a $SECRET_ID -s $SECRET_KEY -b $BUCKET -r $REGION
-        coscmd upload -rs ../ /home/ubuntu/data/ --ignore "../node_modules/*"
+        coscmd upload -rs ../ /home/ubuntu/data/ --ignore "/node_modules"
