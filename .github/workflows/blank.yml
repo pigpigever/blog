@@ -14,7 +14,7 @@ jobs:
     runs-on: linux
 
     steps:
-    - uses: actions/checkout@dev
+    - uses: actions/checkout@v2.0.0
     - name: Run a one-line script
       with:
         repo-token: ${{secrets.GITHUB_TOKEN}}
