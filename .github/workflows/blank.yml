@@ -16,8 +16,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2.0.0
     - name: Run a one-line script
-      with:
-        repo-token: ${{secrets.GITHUB_TOKEN}}
       run:
         yarn install
         yarn build
