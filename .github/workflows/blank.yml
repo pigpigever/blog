@@ -28,6 +28,6 @@ jobs:
         SECRET_KEY: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}
         BUCKET: ${{secrets.TENCENTCLOUD_BUCKET}}
         REGION: ap-shanghai
-      run:  
+      run: |  
         coscmd config -a $SECRET_ID -s $SECRET_KEY -b $BUCKET -r $REGION
         coscmd upload -rs ./ / --ignore "./.git/*"
