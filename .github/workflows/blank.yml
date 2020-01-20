@@ -15,15 +15,13 @@ jobs:
       run:
         yarn add
         yarn build
-    - name: Install Cos
-      run: sudo pip install coscmd
-    - name: Cos Configure
+    - name: Deploy
+      uses: easingthemes/ssh-deploy@v2.0.7
       env:
-        APPID: 1256581102
-        REGION: ap-shanghai
-        BUCKET: blog-1256581102	
-        SECRET_ID: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
-        SECRET_KEY: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}
-      run: coscmd config -a $SECRET_ID -s $SECRET_KEY -b $BUCKET -r $REGION	
-    - name: Upload
-      run: coscmd upload -rs ./ / --ignore "./.git/*"
+        SSH_PRIVATE_KEY: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}
+        ARGS: "-avz --delete"
+        SOURCE: "/dist"
+        REMOTE_HOST: "http://122.51.79.147"
+        REMOTE_PORT:  22
+        REMOTE_USER: "ubuntu"
+        TARGET: "/data/blog/"
