@@ -1,5 +1,4 @@
-name: dev
-
+name: 部署测试环境
 on:
   push:
     branches: 
@@ -7,12 +6,9 @@ on:
   pull_request:
     branches: 
       - master
-
 jobs:
   build:
-
     runs-on: linux
-
     steps:
     - uses: actions/checkout@dev
     - name: Run a one-line script
