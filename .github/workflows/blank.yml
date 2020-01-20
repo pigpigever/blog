@@ -14,11 +14,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2.0.0
-    - name: 下面开始跑部署环境👇
+    - name: Start Running
       run:
         yarn add
         yarn build
-    - name: cos 配置
+    - name: Cos Configure
       env:
         APPID: 1256581102
         REGION: ap-shanghai
@@ -26,5 +26,5 @@ jobs:
         SECRET_ID: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
         SECRET_KEY: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}
       run: coscmd config -a $SECRET_ID -s $SECRET_KEY -b $BUCKET -r $REGION	
-    - name: 上传到 cos	
+    - name: Upload
       run: coscmd upload -rs ./ / --ignore "./.git/*"
