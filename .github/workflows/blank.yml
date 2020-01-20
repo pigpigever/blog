@@ -17,6 +17,8 @@ jobs:
       run:
         yarn add
         yarn build
+    - name: Install Cos
+      run: pip install -U coscmd
     - name: Cos Configure
       env:
         APPID: 1256581102
